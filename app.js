@@ -16,9 +16,11 @@ app.use(cookieParser());
 const { initialRole } = require('./app/data/data');
 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+        'Access-Control-Allow-Headers': 'Content-Type'
+    });
     next();
 });
 
@@ -57,9 +59,13 @@ mongoose.connect(process.env.MONGODB_URL)
 
 
 // create upload folder    
-if (!fs.existsSync('./uploads')) {
+if (!fs.existsSync('./uploadProduct')) {
     // Nếu không, tạo thư mục
-    fs.mkdirSync('./uploads');
+    fs.mkdirSync('./uploadProduct');
+}
+if (!fs.existsSync('./uploadAvatar')) {
+    // Nếu không, tạo thư mục
+    fs.mkdirSync('./uploadAvatar');
 }
 
 app.use("/api", customerRouter);

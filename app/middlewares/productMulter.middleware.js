@@ -1,16 +1,16 @@
 const multer = require('multer');
 
-const storage = multer.diskStorage({
+const productStorage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, './uploads/');
+        cb(null, './uploadProduct/');
     },
     filename: function(req, file, cb) {
         cb(null, file.originalname);
     }
 });
 
-const upload = multer({ 
-    storage: storage,
+const uploadProduct = multer({ 
+    storage: productStorage,
     limits: {
         fileSize: 5 * 1024 * 1024 // limit file size to 5MB
     },
@@ -23,4 +23,4 @@ const upload = multer({
     }
 });
 
-module.exports = upload;
+module.exports = uploadProduct;
